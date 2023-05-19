@@ -18,8 +18,8 @@ def schedule(request):
         end_at = request.POST['end_at']
 
         # Save the data to Supabase
-        supabase_url = 'https://your-supabase-url.supabase.co/rest/v1/table-name'
-        supabase_key = 'your-supabase-key'
+        supabase_url = 'https://plmhcpnlnhgfeydcgijk.supabase.co'
+        supabase_key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBsbWhjcG5sbmhnZmV5ZGNnaWprIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODM3MDg2MjQsImV4cCI6MTk5OTI4NDYyNH0.TSa1If5ES9C-Pr8Ikmeae8yU64IlW0xs5R9KzOcv-kA'
 
         headers = {
             'Content-Type': 'application/json',
