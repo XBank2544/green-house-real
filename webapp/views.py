@@ -4,18 +4,18 @@ from django.http import HttpResponse
 
 
 # Create your views here.
-def index(request):
-  return render(request, "home.html")
+def index(requests):
+  return render(requests, "home.html")
 
-def dashboard(request):
-    return render (request, 'dashboard.html')
+def dashboard(requests):
+    return render (requests, 'dashboard.html')
 
-def schedule(request):
-    if request.method == 'POST':
-        fan_start = request.POST['fan_start']
-        fan_stop = request.POST['fan_stop']
-        start_at = request.POST['start_at']
-        end_at = request.POST['end_at']
+def schedule(requests):
+    if requests.method == 'POST':
+        fan_start = requests.POST['fan_start']
+        fan_stop = requests.POST['fan_stop']
+        start_at = requests.POST['start_at']
+        end_at = requests.POST['end_at']
 
         # Save the data to Supabase
         supabase_url = 'https://plmhcpnlnhgfeydcgijk.supabase.co'
@@ -42,10 +42,10 @@ def schedule(request):
             # Error occurred while saving data
             return HttpResponse('Error occurred while saving data')
     else:
-        return render(request, 'schedule.html')
+        return render(requests, 'schedule.html')
 
 def login(request):
-    return render (request, 'login.html')
+    return render (requests, 'login.html')
     
 def register(request):
-    return render (request, 'register.html')
+    return render (requests, 'register.html')
