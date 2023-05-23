@@ -33,7 +33,7 @@ def schedule(request):
             'end_at': end_at
         }
 
-        response = requests.POST(supabase_url, headers=headers, json=data)
+        response = requests.post(supabase_url, headers=headers, json=data)
 
         if response.status_code == 201:
             # Data saved successfully
