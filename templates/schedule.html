@@ -18,10 +18,10 @@
         <form method="post">
           {% csrf_token %}
           <label for="start_at">Start Date:</label>
-          <input type="text" id="start_at" name="start_at" class="date-picker">
+          <input type="datetime-local" id="start_at" name="start_at">
           <br><br>
           <label for="end_at">End Date:</label>
-          <input type="text" id="end_at" name="end_at" class="date-picker">
+          <input type="datetime-local" id="end_at" name="end_at">
           <br><br>
           <label for="fan_start">Fan Start Temperature (°C):</label>
         <select name="fan_start" id="fan_start">

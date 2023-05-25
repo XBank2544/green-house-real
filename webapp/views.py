@@ -1,4 +1,4 @@
-import requests
+import models
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
@@ -33,14 +33,9 @@ def schedule(request):
             'end_at': end_at
         }
 
-        response = requests.post(supabase_url, headers=headers, json=data)
+        models.Schedule.objects.create(**data)
 
-        if response.status_code == 201:
-            # Data saved successfully
-            return redirect('/dashboard')
-        else:
-            # Error occurred while saving data
-            return HttpResponse('Error occurred while saving data')
+        return render(request, 'schedule.html')
     else:
         return render(request, 'schedule.html')
 
