@@ -1,7 +1,7 @@
 from decimal import Decimal
 from . import models
 from django.shortcuts import render
-
+import supabase
 
 # Create your views here.
 def index(request):
@@ -20,11 +20,12 @@ def schedule(request):
         # Save the data to Supabase
         supabase_url = 'https://plmhcpnlnhgfeydcgijk.supabase.co/database/tables/webapp_schedule'
         supabase_key = 'sbp_d93e1cd9e760d209e58103bdfd6b1c0689343aa8'
+        client = supabase.create_client(supabase_url, supabase_key)
 
-        headers = {
+        {% comment %}headers = {
             'Content-Type': 'application/json',
             'Authorization': f'Bearer {supabase_key}'
-        }
+        }{% endcomment %}
 
         data = {
             'fan_start': Decimal(fan_start),
@@ -32,10 +33,16 @@ def schedule(request):
             'start_at': start_at,
             'end_at': end_at
         }
+        response = client.table('webapp_schedule').insert(data)
+        {% comment %}models.Schedule.objects.create(**data){% endcomment %}
 
-        models.Schedule.objects.create(**data)
-
-        return render(request, 'schedule.html')
+        {% comment %}return render(request, 'schedule.html'){% endcomment %}
+        if response['status'] == 201:
+            # Data saved successfully
+            return render(request, 'schedule.html')
+        else:
+            # Error occurred while saving data
+            return render(request, 'error.html')
     else:
         return render(request, 'schedule.html')
 
