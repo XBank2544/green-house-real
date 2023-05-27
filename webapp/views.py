@@ -22,10 +22,7 @@ def schedule(request):
         supabase_key = 'sbp_d93e1cd9e760d209e58103bdfd6b1c0689343aa8'
         client = supabase.create_client(supabase_url, supabase_key)
 
-        {% comment %}headers = {
-            'Content-Type': 'application/json',
-            'Authorization': f'Bearer {supabase_key}'
-        }{% endcomment %}
+        
 
         data = {
             'fan_start': Decimal(fan_start),
@@ -34,9 +31,7 @@ def schedule(request):
             'end_at': end_at
         }
         response = client.table('webapp_schedule').insert(data)
-        {% comment %}models.Schedule.objects.create(**data){% endcomment %}
-
-        {% comment %}return render(request, 'schedule.html'){% endcomment %}
+        
         if response['status'] == 201:
             # Data saved successfully
             return render(request, 'schedule.html')
