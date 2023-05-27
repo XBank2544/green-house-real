@@ -1,7 +1,6 @@
-from decimal import Demical
-import models
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from decimal import Decimal
+from . import models
+from django.shortcuts import render
 
 
 # Create your views here.
@@ -28,8 +27,8 @@ def schedule(request):
         }
 
         data = {
-            'fan_start': Demical(fan_start),
-            'fan_stop': Demical(fan_stop),
+            'fan_start': Decimal(fan_start),
+            'fan_stop': Decimal(fan_stop),
             'start_at': start_at,
             'end_at': end_at
         }
