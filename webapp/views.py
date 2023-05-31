@@ -1,7 +1,6 @@
 from decimal import Decimal
 from . import models
 from django.shortcuts import render
-import supabase
 
 # Create your views here.
 def index(request):
