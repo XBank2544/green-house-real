@@ -31,13 +31,7 @@ def schedule(request):
             'end_at': end_at
         }
         models.Schedule.objects.create(**data)
-        
-        if response['status'] == 201:
-            # Data saved successfully
-            return render(request, 'schedule.html')
-        else:
-            # Error occurred while saving data
-            return render(request, 'error.html')
+        return render(request, 'schedule.html')
     else:
         return render(request, 'schedule.html')
 
