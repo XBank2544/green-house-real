@@ -20,7 +20,7 @@ def schedule(request):
         # Save the data to Supabase
         supabase_url = 'https://plmhcpnlnhgfeydcgijk.supabase.co/database/tables/webapp_schedule'
         supabase_key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBsbWhjcG5sbmhnZmV5ZGNnaWprIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODM3MDg2MjQsImV4cCI6MTk5OTI4NDYyNH0.TSa1If5ES9C-Pr8Ikmeae8yU64IlW0xs5R9KzOcv-kA'
-        client = supabase.create_client(supabase_url, supabase_key)
+        
 
         
 
@@ -30,7 +30,7 @@ def schedule(request):
             'start_at': start_at,
             'end_at': end_at
         }
-        response = client.table('webapp_schedule').insert(data)
+        models.Schedule.objects.create(**data)
         
         if response['status'] == 201:
             # Data saved successfully
