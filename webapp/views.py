@@ -1,6 +1,7 @@
 from decimal import Decimal
 from . import models
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
@@ -30,6 +31,7 @@ def schedule(request):
             'end_at': end_at
         }
         models.Schedule.objects.create(**data)
+        
         return render(request, 'schedule.html')
     else:
         return render(request, 'schedule.html')
