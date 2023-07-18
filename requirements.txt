@@ -6,3 +6,6 @@ sqlparse==0.4.4
 tomli==2.0.1
 tzdata==2023.3
 psycopg2-binary
+djangorestframework
+markdown
+django-filter
