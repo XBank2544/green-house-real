@@ -12,7 +12,7 @@ from webapp.models import Schedule
 
 
 @csrf_exempt
-@api_view(["POST"])
+@api_view(["POST", "GET"])
 @permission_classes((AllowAny,))
 def updateSchedule(request):
     data = {}
