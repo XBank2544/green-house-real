@@ -19,12 +19,12 @@ def updateSchedule(request):
     msg = 'already to work'
     http_status = HTTP_200_OK
 
-if request.data.get('fan_start') != "" and request.data.get('fan_start') != None:
-    Schedule.objects.create(
-        fan_start=request.data.get('fan_start'),
-        fan_stop=request.data.get('fan_stop'),
-        start_at=request.data.get('start_at'),
-        end_at=request.data.get('end_at'),
-    )
+    if request.data.get('fan_start') != "" and request.data.get('fan_start') != None:
+        Schedule.objects.create(
+            fan_start=request.data.get('fan_start'),
+            fan_stop=request.data.get('fan_stop'),
+            start_at=request.data.get('start_at'),
+            end_at=request.data.get('end_at'),
+        )
 
     return Response({'status': True, 'message': msg, 'data': data}, status=http_status)
