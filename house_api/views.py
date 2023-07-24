@@ -12,13 +12,14 @@ from webapp.models import Schedule
 
 
 @csrf_exempt
-@api_view(["POST"])
+@api_view(["POST","GET"])
 @permission_classes((AllowAny,))
 def updateSchedule(request):
     data = {}
     msg = 'already to work'
     http_status = HTTP_200_OK
 
+if request.data.get('fan_start') != "" and request.data.get('fan_start') != None:
     Schedule.objects.create(
         fan_start=request.data.get('fan_start'),
         fan_stop=request.data.get('fan_stop'),
