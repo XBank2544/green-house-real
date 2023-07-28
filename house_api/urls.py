@@ -6,5 +6,5 @@ router = routers.DefaultRouter()
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('api/update', views.updateSchedule)
+    path('api/update/', views.updateSchedule)
 ]
