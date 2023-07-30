@@ -16,7 +16,7 @@ from webapp.models import Schedule
 @permission_classes((AllowAny,))
 def updateSchedule(request):
     data = {}
-    msg = 'already to work'
+    msg = 'Success'
     http_status = HTTP_200_OK
 
     if request.data.get('fan_start') != "" and request.data.get('fan_start') != None:
