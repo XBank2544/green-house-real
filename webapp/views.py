@@ -16,12 +16,6 @@ def schedule(request):
         fan_stop = request.POST['fan_stop']
         start_at = request.POST['start_at']
         end_at = request.POST['end_at']
-
- 
-        
-
-        
-
         data = {
             'fan_start': Decimal(fan_start),
             'fan_stop': Decimal(fan_stop),
