@@ -3,6 +3,14 @@ from . import models
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
+from django.shortcuts import HttpResponse, redirect, render
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.db.models import Q
+from django.contrib.auth.models import Group
+
 # Create your views here.
 def index(request):
   return render(request, "home.html")
@@ -28,26 +36,60 @@ def schedule(request):
     else:
         return render(request, 'schedule.html')
 
-def login(request):
-    return render (request, 'login.html')
     
 def register(request):
     return render (request, 'register.html')
 
 
-def login(request):
+def userLogin(request):
     if request.method == 'POST':
-    
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user_ip = request.META.get('REMOTE_ADDR') 
-
-        if username == 'your_username' and password == 'your_password' and user_ip == 'your_allowed_ip':
-            
-            return redirect('home')  
+        user = authenticate(
+            username=request.POST.get('user'),
+            password=request.POST.get('password')
+        )
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                return redirect("/")
+            else:
+                messages.error(request, 'This account has been disabled!')
+                return render(request, 'login-social.html')
         else:
-
-            return render(request, 'login.html', {'error_message': 'Invalid credentials'})
+            messages.error(request, 'Error wrong username/password')
+            return render(request, 'login-social.html')
     else:
+        return render(request, 'login-social.html')
 
+
+def Logout(request):
+    messages.error(request, 'User has been loged out')
+    logout(request)
+    return redirect('/login')
+
+def registerCustomer(request):
+    if request.method == 'POST':
+        # name = request.POST.get('username')
+        firstname = request.POST.get('firstname')
+        lastname = request.POST.get('lastname')
+        pass1 = request.POST.get('password1')
+
+        if checkUserExist(email):
+            user = User.objects.create_user(
+                username=email,
+                first_name=firstname,
+                last_name=lastname,
+                password=pass1,
+            )
+
+            my_group = Group.objects.get(name='customer')
+            my_group.user_set.add(user)
+
+            if user is not None:
+                messages.error(request, 'User has been created.')
+                return redirect('/members/login')
+        else:
+            messages.error(request, 'Username or Email is Already Exist')
+            return render(request, 'login.html')
+        return render(request, 'login.html')
+    else:
         return render(request, 'login.html')
