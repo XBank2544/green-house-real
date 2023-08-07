@@ -53,12 +53,12 @@ def userLogin(request):
                 return redirect("/")
             else:
                 messages.error(request, 'This account has been disabled!')
-                return render(request, 'login-social.html')
+                return render(request, 'login.html')
         else:
             messages.error(request, 'Error wrong username/password')
-            return render(request, 'login-social.html')
+            return render(request, 'login.html')
     else:
-        return render(request, 'login-social.html')
+        return render(request, 'login.html')
 
 
 def Logout(request):
@@ -86,7 +86,7 @@ def registerCustomer(request):
 
             if user is not None:
                 messages.error(request, 'User has been created.')
-                return redirect('/members/login')
+                return redirect('/login')
         else:
             messages.error(request, 'Username or Email is Already Exist')
             return render(request, 'login.html')
