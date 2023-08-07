@@ -13,10 +13,12 @@ from django.db.models import Q
 
 # Create your views here.
 def index(request):
-  return render(request, "home.html")
+    return render(request, "home.html")
+
 
 def dashboard(request):
-    return render (request, 'dashboard.html')
+    return render(request, 'dashboard.html')
+
 
 def schedule(request):
     if request.method == 'POST':
@@ -31,25 +33,26 @@ def schedule(request):
             'end_at': end_at
         }
         models.Schedule.objects.create(**data)
-        
+
         return render(request, 'schedule.html')
     else:
         return render(request, 'schedule.html')
 
-    
+
 def register(request):
-    return render (request, 'register.html')
+    return render(request, 'register.html')
 
 
 def userLogin(request):
     if request.method == 'POST':
+
         user = authenticate(
-            username=request.POST.get('User'),
+            username=request.POST.get('user'),
             password=request.POST.get('password')
         )
         if user is not None:
             if user.is_active:
-                login(request, User)
+                login(request, user)
                 return redirect("/")
             else:
                 messages.error(request, 'This account has been disabled!')
@@ -65,6 +68,7 @@ def Logout(request):
     messages.error(request, 'User has been loged out')
     logout(request)
     return redirect('/login')
+
 
 def registerCustomer(request):
     if request.method == 'POST':

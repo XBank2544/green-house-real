@@ -10,27 +10,27 @@
     <div class="col-lg-7">
         <div class="p-5">
             <div class="text-center">
-                <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                <h1 class="h4 text-gray-900 mb-4">เข้าสู่ระบบ</h1>
             </div>
-            <form class="user">
+            <form action="" method="post">
+                {% csrf_token %}
                 <div class="form-group">
                     <input type="text" name="user" class="form-control form-control-user" aria-describedby="userHelp" placeholder="กรอกชื่อจริง...">
                 </div>
                 <div class="form-group">
                     <input type="password" name="password" class="form-control form-control-user"  placeholder="Password">
-            </div>
-            <div class="form-group">
-                <div class="custom-control custom-checkbox small">
-                    <input type="checkbox" class="custom-control-input" id="customCheck">
-                    <label class="custom-control-label" for="customCheck">Remember Me</label>
                 </div>
-        <div class="text-center">
-            <a class="small" href="/register">Create an Account!</a>
-        </div>
+                <div class="form-group">
+                    <div class="custom-control custom-checkbox small">
+                        <input type="checkbox" class="custom-control-input" id="customCheck">
+                        <label class="custom-control-label" for="customCheck">Remember Me</label>
+                    </div>
+                <div class="text-center">
+                    <a class="small" href="/register">Create an Account!</a>
                 </div>
-                <a href="{% url 'home'%}" class="btn btn-primary btn-user btn-block">
-                    summit
-                </a>
+                </div>
+                <input type="submit" class="btn btn-primary btn-user btn-block" value="เข้าสู่ระบบ">
+            </form>      
     </div>
 </div>
 </div>
