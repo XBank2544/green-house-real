@@ -5,33 +5,51 @@
 ลงทะเบียบ
 {% endblock %}
 {% block content %}
-<div class="container text-center">
-<div class="row">
-    <div class="col-lg-7">
-        <div class="p-5">
-            <div class="text-center">
-                <h1 class="h4 text-gray-900 mb-4">Register Now</h1>
-            </div>
-            <form class="user">
-                <div class="form-group">
-                  <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="ชื่อจริง">
-                  </div>
+</head>
+<body class="bg-primary">
+    <div id="layoutAuthentication">
+        <div id="layoutAuthentication_content">
+            <main>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-7">
+                            <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                <div class="card-header justify-content-center"><h3 class="font-weight-light my-4">สร้างบัญชีผู้ใช้</h3></div>
+                                <div class="card-body">
+                                    <form class="user" method="post" action="" oninput='password2.setCustomValidity(password2.value != password1.value ? "Passwords do not match." : "")'>
+                                        {% csrf_token %}
+                                        <div class="form-row">
+                                            <div class="col-md-6">
+                                                <div class="form-group"><label class="small mb-1" for="inputFirstName">ชื่อจริง</label><input class="form-control py-4" id="inputFirstName" type="text" placeholder="กรอกชื่อจริง" name="firstname" /></div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group"><label class="small mb-1" for="inputLastName">นามสกุล</label><input class="form-control py-4" id="inputLastName" type="text" placeholder="กรอกนามสกุล" name="lastname" /></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group"><label class="small mb-1" for="inputEmailAddress">อีเมล</label><input class="form-control py-4" id="inputEmailAddress" type="email" aria-describedby="emailHelp" placeholder="กรอกอีเมลแอดเดรส" name="email" /></div>
+                                        <div class="form-row">
+                                            <div class="col-md-6">
+                                                <div class="form-group"><label class="small mb-1" for="inputPassword">รหัสผ่าน</label><input class="form-control py-4" id="inputPassword" type="password" placeholder="กรอกรหัสผ่าน" name="password1" /></div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group"><label class="small mb-1" for="inputConfirmPassword">รหัสผ่าน</label><input class="form-control py-4" id="inputConfirmPassword" type="password" placeholder="ยืนยันรหัสผ่านอีกครั้ง" name="password2" /></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mt-4 mb-0">
+                                            <button class="btn btn-primary btn-user btn-block" type="submit">ยืนยันการสร้างบัญชี</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="card-footer text-center">
+                                    <div class="small"><a href="{% url 'login' %}">หากมีบัญชีผู้ซื้ออยู่แล้ว? กลับไปหน้าเข้าสู่ระบบ</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                  <!-- wrapper with text-align: center and input box with style attributes -->
-                  <div class="col-sm-6 mb-3 mb-sm-0" style="text-align: center;">
-                    <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="นามสกุล" style="display: block; margin: 0 auto;">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="รหัสผ่าน">
-                  </div>
-                </div>
-                <a href="/login" class="btn btn-primary btn-user btn-block">
-                  Register Account
-                </a>
+            </main>
+        </div>
+        <div id="layoutAuthentication_footer">
               </form>              
         </div>
     </div>

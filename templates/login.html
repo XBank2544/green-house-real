@@ -14,20 +14,21 @@
             </div>
             <form class="user">
                 <div class="form-group">
-                    <input type="user" class="form-control form-control-user"
-                        id="exampleInputuser" aria-describedby="userHelp"
-                        placeholder="กรอกชื่อจริง...">
+                    <input type="text" name="user" class="form-control form-control-user" aria-describedby="userHelp" placeholder="กรอกชื่อจริง...">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control form-control-user"
-                        id="exampleInputPassword" placeholder="Password">
+                    <input type="password" name="password" class="form-control form-control-user"  placeholder="Password">
             </div>
+            <div class="form-group">
+                <div class="custom-control custom-checkbox small">
+                    <input type="checkbox" class="custom-control-input" id="customCheck">
+                    <label class="custom-control-label" for="customCheck">Remember Me</label>
                 </div>
         <div class="text-center">
             <a class="small" href="/register">Create an Account!</a>
         </div>
                 </div>
-                <a href="" class="btn btn-primary btn-user btn-block">
+                <a href="{% url 'home'%}" class="btn btn-primary btn-user btn-block">
                     summit
                 </a>
     </div>

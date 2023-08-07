@@ -9,7 +9,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db.models import Q
-from django.contrib.auth.models import Group
+
 
 # Create your views here.
 def index(request):
@@ -44,12 +44,12 @@ def register(request):
 def userLogin(request):
     if request.method == 'POST':
         user = authenticate(
-            username=request.POST.get('user'),
+            username=request.POST.get('User'),
             password=request.POST.get('password')
         )
         if user is not None:
             if user.is_active:
-                login(request, user)
+                login(request, User)
                 return redirect("/")
             else:
                 messages.error(request, 'This account has been disabled!')
@@ -82,7 +82,7 @@ def registerCustomer(request):
             )
 
             my_group = Group.objects.get(name='customer')
-            my_group.user_set.add(user)
+            my_group.user_set.add(User)
 
             if user is not None:
                 messages.error(request, 'User has been created.')
