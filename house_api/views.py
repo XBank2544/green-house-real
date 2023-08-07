@@ -12,7 +12,7 @@ from webapp.models import Schedule
 
 
 @csrf_exempt
-@api_view(["POST","GET"])
+@api_view(["POST", "GET"])
 @permission_classes((AllowAny,))
 def updateSchedule(request):
     data = {}
@@ -25,7 +25,6 @@ def updateSchedule(request):
             fan_stop=request.data.get('fan_stop'),
             start_at=request.data.get('start_at'),
             end_at=request.data.get('end_at'),
-            temp=request.data.get('temp'),
         )
 
     return Response({'status': True, 'message': msg, 'data': data}, status=http_status)
