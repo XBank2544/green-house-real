@@ -14,17 +14,12 @@
     <div class="card-body">
         <!-- Temperature Circle -->
         <div class="circle">
-            {% if listdata %}  
-            <h1 id="temperature">{{listdata.last.temp}}</h1>
+            {% if listdata %}
+            <h1 id="temperature">{{ listdata.last.temp }}</h1>
             {% endif %}
             <span>&#8451;</span>
         </div>
     <br>
-        <!-- Digital Clock -->
-    <h1 class="h3 mb-0 text-bg-gray-900" style="text-align:center;">เวลาปัจจุบัน</h1>
-        <div class="clock">
-            <p id="clock"></p>
-        </div>
     </div>
 </div>
     <!-- Countdown Timer -->
