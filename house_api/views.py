@@ -7,9 +7,8 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.status import (
     HTTP_200_OK
 )
-
+from django.shortcuts import render
 from webapp.models import Schedule
-
 
 @csrf_exempt
 @api_view(["POST", "GET"])

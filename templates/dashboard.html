@@ -9,35 +9,87 @@
 <!-- Project Card Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
+        <h6 class="m-0 font-weight-bold text-primary">อุณหภูมิ</h6>
     </div>
     <div class="card-body">
-        <h4 class="small font-weight-bold">อุณหภูมิในโรงเรือน <span
-                class="float-right"></span>0</h4>
-        <div class="progress mb-4">
-            <div class="progress-bar bg-danger" role="progressbar" style="width: 0%"
-                aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+        <!-- Temperature Circle -->
+        <div class="circle">
+            {% if listdata %}  
+            <h1 id="temperature">{{listdata.last.temp}}</h1>
+            {% endif %}
+            <span>&#8451;</span>
         </div>
-        <h4 class="small font-weight-bold">ความชื้นในอากาศ <span
-                class="float-right"></span>0</h4>
-        <div class="progress mb-4">
-            <div class="progress-bar bg-warning" role="progressbar" style="width: 0%"
-                aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-        <h4 class="small font-weight-bold">ความชื้นในดิน <span
-                class="float-right"></span>0</h4>
-        <div class="progress mb-4">
-            <div class="progress-bar" role="progressbar" style="width: 0%"
-                aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+    <br>
+        <!-- Digital Clock -->
+    <h1 class="h3 mb-0 text-bg-gray-900" style="text-align:center;">เวลาปัจจุบัน</h1>
+        <div class="clock">
+            <p id="clock"></p>
         </div>
     </div>
 </div>
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+    <!-- Countdown Timer -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">ตารางเวลา</h6>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">ลำดับที่</th>
+                    <th scope="col">อุณหภูมิเมื่อพัดลมเริ่มทำงาน</th>
+                    <th scope="col">อุณหภูมิเมื่อพัดลมหยุดทำงาน</th>
+                    <th scope="col">เริ่มต้นวันที่</th>
+                    <th scope="col">หยุดวันที่</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for schedule in listdata %}  
+                  <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{schedule.fan_start}}</td>
+                    <td>{{schedule.fan_stop}}</td>
+                    <td>{{schedule.start_at}}</td>
+                    <td>{{schedule.end_at}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
 
     <head>
+        <style>
+            .circle {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 200px;
+                height: 200px;
+                background-color: #3498db;
+                border-radius: 50%;
+                margin: 0 auto;
+            }
+            
+            .circle h1 {
+                font-size: 60px;
+                color: white;
+                margin: 0;
+            }
+            
+            .circle span {
+                font-size: 24px;
+                color: white;
+                margin-left: 5px;
+            }
+            </style>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
         p {
@@ -50,35 +102,50 @@
         <body>
         <!-- Display the countdown timer in an element -->
         <p id="demo"></p>
-    
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+var countDownDate = new Date("Mar 25, 2023 09:00:00").getTime();
+
+// Update the count down and clock every 1 second
+var x = setInterval(function() {
+    // ... (rest of the countdown timer JavaScript code)
+
+    // Update the digital clock
+    var now = new Date();
+    var hours = now.getHours();
+    var minutes = now.getMinutes();
+    var seconds = now.getSeconds();
+    document.getElementById("clock").innerHTML = hours + ":" + minutes + ":" + seconds;
+}, 1000);
 // Set the date we're counting down to
 var countDownDate = new Date("Mar 25, 2023 09:00:00").getTime();
 
-// Update the count down every 1 second
-var x = setInterval(function() {
+// Function to update the temperature display
+function updateTemperatureDisplay() {
+        $.get("{% url 'dashboard' %}", function(data) {
+            const temperature = data.temperature;
+            const temperatureCircle = document.getElementById('temperature-circle');
+            temperatureCircle.textContent = temperature + "°C";
+        });
+    }
 
-  // Get today's date and time
-  var now = new Date().getTime();
+    // Call the update function when the page loads
+    $(document).ready(function() {
+        updateTemperatureDisplay();
+    });
+    var x = setInterval(function() {
+    // Update the digital clock
+    var now = new Date();
+    var hours = now.getHours();
+    var minutes = now.getMinutes();
+    var seconds = now.getSeconds();
+    document.getElementById("clock").innerHTML = hours + ":" + minutes + ":" + seconds;
 
-  // Find the distance between now and the count down date
-  var distance = countDownDate - now;
-
-  // Time calculations for days, hours, minutes and seconds
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  // Display the result in the element with id="demo"
-  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-  + minutes + "m " + seconds + "s ";
-
-  // If the count down is finished, write some text
-  if (distance < 0) {
-    clearInterval(x);
-    document.getElementById("demo").innerHTML = "Mission Complete";
-  }
+    
+    // Update the temperature (replace with actual value)
+    var temperatureValue = 0; // Replace with the actual received temperature value from ESP32
+    document.getElementById("temperature").innerHTML = temperatureValue.toFixed(1);
+    
 }, 1000);
 </script>
 {%endblock%}

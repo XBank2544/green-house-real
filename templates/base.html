@@ -34,9 +34,9 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href=" ">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                    <i class="fab fa-fw fa-envira" aria-hidden="true"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Greenhouses Application</sup></div>
+                <div class="sidebar-brand-text mx-3">Greenhouse Organizer</sup></div>
             </a>
 
             <!-- Divider -->
@@ -46,33 +46,33 @@
             <li class="nav-item active">
                 <a class="nav-link" href="{% url 'home'%}">
                     <i class="fas fa-fw fa-home"></i>
-                    <span>หน้าแรก</span></a>
+                    <span>Home</span></a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="{% url 'dashboard'%}">
-                    <i class="fas fa-fw fa-leaf"></i>
+                    <i class="fas fa-fw fa-list-alt" aria-hidden="true"></i>
                     <span>Dashboard</span></a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="{% url 'schedule'%}">
-                    <i class="fas fa-fw fa-cogs"></i>
+                    <i class="fas fa-fw fa-laptop" aria-hidden="true"></i>
                     <span>Schedule</span></a>
             </li>
             {% if not user.is_authenticated %}
             <li class="nav-item active">
                 <a class="nav-link" href="/login">
-                    <i class="fas fa-fw "></i>
-                    <span>login</span></a>
+                    <i class="fa fa-fw fa-sign-in-alt" aria-hidden="true"></i>
+                    <span>Login</span></a>
             </li>
             {% else %}
             <li class="nav-item active">
                 <a class="nav-link" href="{% url 'admin:index' %}">
-                    <i class="fas fa-fw "></i>
-                    <span>show data</span></a>
+                    <i class="fas fa-fw fa-user-secret"></i>
+                    <span>Admin Data</span></a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="{% url 'admin:logout' %}">
-                    <i class="fas fa-fw "></i>
+                    <i class="fa fa-fw fa-sign-out-alt" aria-hidden="true"></i>
                     <span>Logout</span></a>
             </li>
             {% endif %}
@@ -168,7 +168,7 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    <h1 class="h3 mb-0 text-gray-800">{% block title %}ข้อมูลเบื้องต้นของบอนสี{% endblock %}</h1>
+                    <h1 class="h3 mb-0 text-gray-800">{% block title %}หน้าแรก{% endblock %}</h1>
                     <!-- Page Heading -->
             
 
