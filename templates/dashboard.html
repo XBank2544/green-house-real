@@ -6,20 +6,60 @@
 {% endblock %}
 
 {% block content %}
+<style>
+.circle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 200px;
+    background-color: #3498db;
+    border-radius: 50%;
+    margin: 0 auto;
+    position: relative; /* ทำให้มีพื้นที่สำหรับข้อความด้านบน */
+}
+
+.small {
+    font-size: 32px !important; /* ปรับขนาดตามที่คุณต้องการ */
+}
+
+.circle-label {
+    position: absolute;
+    top: -30px; /* ปรับตำแหน่งข้อความด้านบน */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 16px;
+    text-align: center;
+    white-space: nowrap; /* ไม่ให้ข้อความขึ้นบรรทัดใหม่ */
+}
+</style>
+
 <!-- Project Card Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">อุณหภูมิ</h6>
     </div>
-    <div class="card-body">
+    <div class="card-body" style="display: flex; justify-content: center; align-items: center;">
         <!-- Temperature Circle -->
         <div class="circle">
-            {% if listdata %}
-            <h1 id="temperature">{{ listdata.last.temp }}</h1>
+            {% if valuelist %}
+            <h1 id="temperature" class="small">{{ valuelist.last.temp }} &#8451</h1>
             {% endif %}
-            <span>&#8451;</span>
+            <p class="circle-label">อุณหภูมิ</p>
         </div>
-    <br>
+        <div class="circle">
+            {% if valuelist %}
+            <h1 id="humidity" class="small">{{ valuelist.last.humid }} %</h1>
+            {% endif %}
+            <p class="circle-label">ความชื้นในอากาศ</p>
+        </div>
+        <div class="circle">
+            {% if valuelist %}
+            <h1 id="moisture" class="small">{{ valuelist.last.moist }} %</h1>
+            {% endif %}
+            <p class="circle-label">ความชื้นในดิน</p>
+        </div>
     </div>
 </div>
     <!-- Countdown Timer -->

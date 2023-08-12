@@ -9,7 +9,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db.models import Q
-from webapp.models import Schedule
+from webapp.models import Greenhouse, Schedule
 
 
 # Create your views here.
@@ -19,6 +19,8 @@ def index(request):
 
 def dashboard(request):
     context = {}
+    value_list = Greenhouse.objects.all()
+    context['valuelist'] = value_list
     schedule_list = Schedule.objects.all()
     context['listdata'] = schedule_list
     return render(request, "dashboard.html", context)
